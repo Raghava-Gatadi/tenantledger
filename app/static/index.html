@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#103f3a">
+  <title>TenantLedger · Expense workspace</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div id="loading" class="loading"><span class="brandmark">tl</span><p>Opening your workspace…</p></div>
+  <section id="welcome" hidden>
+    <div class="welcome-copy">
+      <a class="brand" href="/"><span class="brandmark">tl</span>TenantLedger<span class="brand-dot">.</span></a>
+      <div class="welcome-body"><span class="eyebrow">A LITTLE ORDER GOES A LONG WAY</span><h1>Good work.<br>Clear expenses.</h1><p>A shared space for receipts, thoughtful approvals, and everything your team needs to keep moving.</p><a class="button bright" href="/auth/login">Sign in to your workspace <span aria-hidden="true">↗</span></a><span class="login-note">Your organization. Your permissions. One place.</span></div>
+      <div class="welcome-foot">TENANTLEDGER <span>Built for teams that care about the details.</span></div>
+    </div>
+    <div class="welcome-demo">
+      <div class="demo-card"><span class="eyebrow">YOUR NEXT WORKSPACE</span><div class="demo-art" aria-hidden="true"><div class="paper"><div class="paper-heading">Expense report <span>✓</span></div><div class="paper-line"></div><div class="paper-line short"></div><div class="paper-amount">$128.50</div><div class="paper-bottom">Travel <span class="badge approved">Approved</span></div></div><div class="floating-note">✓ &nbsp; Every detail accounted for</div></div><h2>Take a look around.</h2><p>This local portfolio demo includes two fictional organizations and several roles.</p><details open><summary>Demo sign-in accounts</summary><div class="demo-users"><span><b>alice</b> Employee · Northstar</span><span><b>bob</b> Approver · Northstar</span><span><b>carol</b> Admin · Northstar</span><span><b>diana</b> Auditor · Northstar</span><span><b>alex</b> Employee · Northstar / Admin · Juniper</span><span><b>eve</b> Employee · Juniper</span><span><b>frank</b> Approver · Juniper</span><span><b>grace</b> Auditor · Juniper</span></div><p class="demo-password">Shared demo password: <code>LedgerDemo123!</code></p></details></div>
+    </div>
+  </section>
+  <div id="workspace" class="workspace" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="/"><span class="brandmark">tl</span>TenantLedger<span class="brand-dot">.</span></a>
+      <div class="org-switch"><label for="organization">WORKSPACE</label><select id="organization" aria-label="Organization"></select><span id="role-label"></span></div>
+      <span class="nav-label">MANAGE</span>
+      <nav id="navigation" aria-label="Main navigation">
+        <button data-view="expenses" class="nav-item active"><span class="nav-icon">▤</span> Expenses <span id="nav-count"></span></button>
+        <button data-view="members" class="nav-item" hidden><span class="nav-icon">♧</span> Team members</button>
+        <button data-view="audit" class="nav-item" hidden><span class="nav-icon">◷</span> Activity log</button>
+        <button data-view="assignments" class="nav-item" hidden><span class="nav-icon">⇄</span> Assignments</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="workspace-note"><span class="status-dot"></span> All changes saved securely<p>Good records make great teamwork.</p></div><div class="user-block"><span id="avatar" class="avatar"></span><div><strong id="user-name"></strong><span id="user-email"></span></div><button id="logout" class="icon-button" aria-label="Sign out" title="Sign out">↗</button></div></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><span class="breadcrumb">Workspace</span><span class="slash">/</span><span id="breadcrumb-current">Expenses</span></div><div><span class="demo-pill"><span class="status-dot"></span> Demo workspace</span><button id="mobile-logout" class="mobile-signout">Sign out ↗</button></div></header>
+      <div class="content">
+        <div id="empty-org" hidden class="empty-state"><h1>Welcome to TenantLedger</h1><p>You don’t have an active organization membership yet. Ask your organization admin for an invitation token.</p><button id="accept-invite" class="button primary">Accept an invitation</button></div>
+        <section id="expense-view">
+          <div class="page-heading"><div><div class="eyebrow">KEEP THE DETAILS IN ORDER</div><h1 id="expense-title">Your expenses</h1><p id="expense-subtitle">From the first receipt to the final approval.</p></div><button id="new-expense" class="button primary"><span>＋</span> New expense</button></div>
+          <div id="stats" class="stats"></div>
+          <section class="table-card">
+            <div class="table-heading"><h2>Expense overview <span id="total-count" class="count-pill">0</span></h2><button id="export" class="button secondary">↓ &nbsp; Export CSV</button></div>
+            <div class="table-controls"><div id="filters" class="tabs" role="group" aria-label="Filter by status"><button data-status="" class="selected">All expenses</button><button data-status="submitted">Pending</button><button data-status="approved">Approved</button><button data-status="draft">Drafts</button><button data-status="rejected">Rejected</button></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find an expense…" aria-label="Find an expense" maxlength="120"></label></div>
+            <div class="table-scroll"><table><thead><tr><th>EXPENSE</th><th>SUBMITTED BY</th><th>DATE CREATED</th><th>AMOUNT</th><th>STATUS</th><th><span class="sr-only">Open expense</span></th></tr></thead><tbody id="expense-rows"></tbody></table></div>
+            <div id="table-empty" class="empty-state" hidden><div class="empty-icon">▤</div><h3>No expenses here yet</h3><p>Create an expense or try a different filter.</p></div>
+            <footer class="table-footer"><span id="page-info"></span><div><button id="prev-page" class="button secondary">← Previous</button><button id="next-page" class="button secondary">Next →</button></div></footer>
+          </section>
+          <div class="quiet-note"><span>ⓘ</span><p>Need to make a change? You can edit an expense while it’s still a draft.</p></div>
+        </section>
+        <section id="members-view" hidden><div class="page-heading"><div><div class="eyebrow">THE PEOPLE BEHIND THE WORK</div><h1>Team members</h1><p>Manage access within this organization.</p></div><button id="invite-member" class="button primary">＋ Invite member</button></div><div id="member-list" class="member-list"></div></section>
+        <section id="audit-view" hidden><div class="page-heading"><div><div class="eyebrow">A CLEAR RECORD</div><h1>Activity log</h1><p>Recent changes and actions in this organization.</p></div><button id="refresh-audit" class="button secondary">↻ Refresh</button></div><div id="audit-list" class="audit-list"></div><div class="table-footer"><span id="audit-page-info"></span><div><button id="audit-prev" class="button secondary">← Previous</button><button id="audit-next" class="button secondary">Next →</button></div></div></section>
+        <section id="assignments-view" hidden><div class="page-heading"><div><div class="eyebrow">KEEP APPROVALS MOVING</div><h1>Approval assignments</h1><p>Reassign pending work when an approver is unavailable. Expense content is restricted to its viewers.</p></div></div><div id="assignment-list" class="member-list"></div></section>
+        <footer class="content-footer"><span>TenantLedger <b>·</b> A little more clarity.</span><button id="join-org" class="text-button">Accept an invitation ↗</button></footer>
+      </div>
+    </main>
+  </div>
+  <dialog id="modal"><div class="modal-header"><div><span class="eyebrow" id="modal-eyebrow">TENANTLEDGER</span><h2 id="modal-title"></h2></div><button id="close-modal" class="icon-button" aria-label="Close dialog">×</button></div><div id="modal-body"></div></dialog>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

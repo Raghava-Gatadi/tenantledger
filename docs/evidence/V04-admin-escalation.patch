@@ -1,0 +1,11 @@
+--- secure/app/main.py
++++ vulnerable/app/main.py
+@@ -338,7 +338,7 @@
+ 
+ @app.patch("/api/orgs/{org_id}/members/{user_id}", tags=["administration"])
+ def edit_member(user_id: str, body: MemberEdit, ctx: Tenant = Depends(tenant), db: Session = Depends(get_db)):
+-    require_role(ctx, "admin")
++    # Deliberate local lab fault: no administrative permission check.
+     # Serialize administration without granting UPDATE on organization metadata.
+     # Hash collisions merely serialize unrelated organizations; they cannot grant access.
+     db.execute(text("SELECT pg_advisory_xact_lock(hashtextextended(:org, 0))"), {"org": ctx.org_id})

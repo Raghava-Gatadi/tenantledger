@@ -1,0 +1,224 @@
+{
+  "realm": "tenantledger",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": false,
+  "rememberMe": false,
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 3600,
+  "bruteForceProtected": true,
+  "loginWithEmailAllowed": true,
+  "clients": [
+    {
+      "clientId": "tenantledger-web",
+      "name": "TenantLedger",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "local-web-client-secret",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "http://localhost:8000/auth/callback"
+      ],
+      "webOrigins": [
+        "http://localhost:8000"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:8000/*"
+      },
+      "protocolMappers": [
+        {
+          "name": "ledger-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "tenantledger-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "ledger-test",
+      "name": "Local integration tests ONLY",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "local-test-client-secret",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "protocolMappers": [
+        {
+          "name": "ledger-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "tenantledger-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "tenantledger-api",
+      "name": "TenantLedger API introspection",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "local-api-client-secret",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    }
+  ],
+  "users": [
+    {
+      "id": "10000000-0000-0000-0000-000000000001",
+      "username": "alice",
+      "firstName": "Alice",
+      "lastName": "Chen",
+      "email": "alice@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000002",
+      "username": "bob",
+      "firstName": "Bob",
+      "lastName": "Rivera",
+      "email": "bob@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000003",
+      "username": "carol",
+      "firstName": "Carol",
+      "lastName": "Brooks",
+      "email": "carol@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000004",
+      "username": "diana",
+      "firstName": "Diana",
+      "lastName": "Patel",
+      "email": "diana@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000005",
+      "username": "alex",
+      "firstName": "Alex",
+      "lastName": "Morgan",
+      "email": "alex@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000006",
+      "username": "eve",
+      "firstName": "Eve",
+      "lastName": "Walker",
+      "email": "eve@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000007",
+      "username": "frank",
+      "firstName": "Frank",
+      "lastName": "Lee",
+      "email": "frank@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000008",
+      "username": "grace",
+      "firstName": "Grace",
+      "lastName": "Kim",
+      "email": "grace@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000009",
+      "username": "heidi",
+      "firstName": "Heidi",
+      "lastName": "Nguyen",
+      "email": "heidi@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "LedgerDemo123!",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

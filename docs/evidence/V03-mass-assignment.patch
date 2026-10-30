@@ -1,0 +1,11 @@
+--- secure/app/schemas.py
++++ vulnerable/app/schemas.py
+@@ -7,7 +7,7 @@
+ 
+ 
+ class StrictModel(BaseModel):
+-    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
++    model_config = ConfigDict(extra="allow", str_strip_whitespace=True)
+ 
+ 
+ class ExpenseCreate(StrictModel):

@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-10-28T09:31:47.932451+00:00",
+  "checks": [
+    "OIDC authorization code + PKCE login",
+    "desktop dashboard",
+    "mobile layout",
+    "create draft, attach receipt, submit with CSRF protection",
+    "browser logout removes local session and returns through Keycloak",
+    "assigned approver completes workflow",
+    "same user has different roles in two organizations",
+    "self-hosted OpenAPI documentation"
+  ],
+  "javascript_errors": [],
+  "synthetic_expense_created": "Browser smoke 20261028-093145"
+}

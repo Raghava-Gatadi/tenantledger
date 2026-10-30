@@ -1,0 +1,11 @@
+--- secure/app/policy.py
++++ vulnerable/app/policy.py
+@@ -36,7 +36,7 @@
+     if ctx.role == "approver":
+         return statement.where(or_(Expense.owner_id == ctx.user.user_id,
+                                    (Expense.approver_id == ctx.user.user_id) & (Expense.status != "draft")))
+-    return statement.where(Expense.owner_id == ctx.user.user_id)
++    return statement  # Deliberate local lab fault: missing ownership restriction.
+ 
+ 
+ def expense_for(db: Session, ctx: Tenant, expense_id: str, *, lock=False) -> Expense:

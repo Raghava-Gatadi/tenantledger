@@ -1,0 +1,14 @@
+--- secure/app/policy.py
++++ vulnerable/app/policy.py
+@@ -18,7 +18,10 @@
+ 
+ def tenant(org_id: str, user: Principal = Depends(principal), db: Session = Depends(get_db)) -> Tenant:
+     membership = db.get(Membership, (org_id, user.user_id))
+-    if not membership or not membership.active:
++    if not membership:
++        set_tenant(db, org_id)
++        return Tenant(org_id, user, "auditor")
++    if not membership.active:
+         raise HTTPException(404, "Organization not found")
+     set_tenant(db, org_id)
+     return Tenant(org_id, user, membership.role)

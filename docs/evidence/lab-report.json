@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-10-28T09:30:09.413604+00:00",
+  "secure_baseline_passed": true,
+  "mutants_detected": 5,
+  "mutants_total": 5,
+  "results": [
+    {
+      "case": "V01-tenant-boundary",
+      "detected": true,
+      "test": "test_lab_tenant_boundary",
+      "expected_secure_status": 404,
+      "observed_vulnerable_status": 200
+    },
+    {
+      "case": "V02-object-ownership",
+      "detected": true,
+      "test": "test_lab_object_ownership",
+      "expected_secure_status": 404,
+      "observed_vulnerable_status": 200
+    },
+    {
+      "case": "V03-mass-assignment",
+      "detected": true,
+      "test": "test_lab_protected_property",
+      "expected_secure_status": 422,
+      "observed_vulnerable_status": 201
+    },
+    {
+      "case": "V04-admin-escalation",
+      "detected": true,
+      "test": "test_lab_admin_action",
+      "expected_secure_status": 403,
+      "observed_vulnerable_status": 200
+    },
+    {
+      "case": "V05-stale-membership",
+      "detected": true,
+      "test": "test_lab_stale_membership",
+      "expected_secure_status": 404,
+      "observed_vulnerable_status": 200
+    }
+  ]
+}
