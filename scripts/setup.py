@@ -4,6 +4,9 @@ import secrets
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
+# Create the bind-mount directory as the host user before Docker can create it
+# as root, so host-side browser checks can also write their evidence on Linux.
+(root / "artifacts").mkdir(exist_ok=True)
 path = root / ".env"
 if not path.exists():
     path.write_text(
